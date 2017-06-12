@@ -1,4 +1,5 @@
-more-functional-slides
+# Elm
+## Functional Programming for More Functional Programmers
 
 Uses [pandoc](http://pandoc.org/) and [reveal.js](https://github.com/hakimel/reveal.js/)
 
@@ -9,10 +10,4 @@ Installed pandoc with homebrew
 Used full installation of reveal.js in this directory as well.
 
 
-Produced the slides with:
-
-> pandoc -s -i -t revealjs -V theme:black -c override.css slides.md -o slides.html --slide-level 2
-
--s standalone
-
--i incremental
+Produced slides with build.sh
