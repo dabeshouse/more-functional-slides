@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Functional Programming for">
+  <title>Elm</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+  <link rel="stylesheet" href="override.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">Elm</h1>
+  <p class="author">Functional Programming for</p>
+  <p class="date">More Functional Programmers</p>
+</section>
+
+<section id="elm" class="slide level2">
+<h2>Elm</h2>
+<figure>
+<img src="Elm_Logo.png" style="width:30.0%" />
+</figure>
+</section>
+<section id="why-elm" class="slide level2">
+<h2>Why Elm?</h2>
+</section>
+<section id="developer-friendly" class="slide level2">
+<h2>Developer Friendly</h2>
+<p>&quot;A delightful language for reliable web programming&quot;</p>
+</section>
+<section id="speed" class="slide level2">
+<h2>Speed</h2>
+<figure>
+<img src="SpeedComparison.png" />
+</figure>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<ul>
+<li class="fragment">Functional programming</li>
+<li class="fragment">How Elm did FP right for web development</li>
+<li class="fragment">Elm Architecture</li>
+<li class="fragment">Code</li>
+</ul>
+</section>
+<section id="predecessors" class="slide level2">
+<h2>Predecessors</h2>
+<ul>
+<li class="fragment">λ-Calculus</li>
+<li class="fragment">Lisp</li>
+<li class="fragment">ML</li>
+<li class="fragment">Haskell</li>
+</ul>
+</section>
+<section id="functional-programming" class="slide level2">
+<h2>Functional Programming</h2>
+<ul>
+<li class="fragment">Immutable state</li>
+<li class="fragment">Pure functions</li>
+<li class="fragment">Higher order functions</li>
+</ul>
+</section>
+<section id="functional-programming-1" class="slide level2">
+<h2>Functional Programming</h2>
+<ul>
+<li class="fragment">Composition</li>
+<li class="fragment">Currying</li>
+</ul>
+</section>
+<section><section id="elm-1" class="titleslide slide level1"><h1>Elm</h1></section><section id="elm-generates" class="slide level2">
+<h2>Elm Generates</h2>
+<ul>
+<li class="fragment">JavaScript</li>
+<li class="fragment">HTML</li>
+<li class="fragment">CSS</li>
+</ul>
+</section><section id="elm-does-not-generate" class="slide level2">
+<h2>Elm Does Not Generate</h2>
+<ul>
+<li class="fragment">null</li>
+</ul>
+</section><section id="no-more" class="slide level2">
+<h2>No more</h2>
+<pre><code>Uncaught TypeError: Cannot read property &#39;x&#39; of undefined</code></pre>
+</section><section id="just-maybe" class="slide level2">
+<h2>Just Maybe</h2>
+<pre><code>type Maybe something
+   = Just something
+   | Nothing</code></pre>
+</section></section>
+<section><section id="elm-architecture" class="titleslide slide level1"><h1>Elm Architecture</h1></section><section id="section-1" class="slide level2">
+<h2></h2>
+<figure>
+<img src="Basic%20Elm%20Architecture.svg" alt="Basic Elm Architecture" /><figcaption>Basic Elm Architecture</figcaption>
+</figure>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<pre><code>beginnerProgram :
+   { model : model
+   , view : model -&gt; Html msg
+   , update : msg -&gt; model -&gt; model }
+    -&gt; Program Never model msg</code></pre>
+</section><section id="model" class="slide level2">
+<h2>Model</h2>
+<pre><code>type alias Model = Int</code></pre>
+</section><section id="a-more-complex-model" class="slide level2">
+<h2>A More Complex Model</h2>
+<pre><code>type alias Model =
+    { score : Int
+    , player : User
+    , opponent : User
+    , board : GameBoard
+    }</code></pre>
+</section><section id="msg" class="slide level2">
+<h2>Msg</h2>
+<pre><code>type Msg = Increment
+         | Decrement</code></pre>
+</section><section id="view" class="slide level2">
+<h2>View</h2>
+<pre><code>// From evancz/elm-architecture-tutorial
+
+view : Model -&gt; Html Msg
+view model =
+  div []
+    [ button [ onClick Decrement ] [ text &quot;-&quot; ]
+    , div [] [ text (toString model) ]
+    , button [ onClick Increment ] [ text &quot;+&quot; ]
+    ]</code></pre>
+</section><section id="update" class="slide level2">
+<h2>Update</h2>
+<pre><code>// From evancz/elm-architecture-tutorial
+
+update : Msg -&gt; Model -&gt; Model
+update msg model =
+  case msg of
+    Increment -&gt;
+      model + 1
+
+    Decrement -&gt;
+      model - 1</code></pre>
+</section></section>
+<section><section id="elm-architecture-1" class="titleslide slide level1"><h1>Elm Architecture</h1></section><section id="section-3" class="slide level2">
+<h2></h2>
+<figure>
+<img src="Standard%20Elm%20Architecture.svg" alt="Elm Architecture" /><figcaption>Elm Architecture</figcaption>
+</figure>
+</section><section id="section-4" class="slide level2">
+<h2></h2>
+<pre><code>program :
+  { init : (model, Cmd msg)
+  , update : msg -&gt; model -&gt; (model, Cmd msg)
+  , subscriptions : model -&gt; Sub msg
+  , view : model -&gt; Html msg }
+    -&gt; Program Never model msg</code></pre>
+</section><section id="update-1" class="slide level2">
+<h2>Update</h2>
+<pre><code>update : Msg -&gt; Model -&gt; ( Model, Cmd Msg )</code></pre>
+</section><section id="subscriptions" class="slide level2">
+<h2>Subscriptions</h2>
+<p>Input from the platform</p>
+<ul>
+<li class="fragment">Mouse or keyboard</li>
+<li class="fragment">Browser changes</li>
+<li class="fragment">Websockets</li>
+</ul>
+</section><section id="section-5" class="slide level2">
+<h2></h2>
+<pre><code>subscriptions : Model -&gt; Sub Msg
+subscriptions model =
+    Sub.batch
+        [ Mouse.clicks MouseMsg
+        , Keyboard.downs KeyMsg
+        ]</code></pre>
+</section><section id="commands" class="slide level2">
+<h2>Commands</h2>
+<p>Make requests to the platform</p>
+<ul>
+<li class="fragment">HTTP request</li>
+<li class="fragment">Save to local storage</li>
+<li class="fragment">Generate a random number</li>
+</ul>
+</section><section id="add-initial-interaction" class="slide level2">
+<h2>Add Initial Interaction</h2>
+<p>Starting flags from javascript</p>
+<pre><code>programWithFlags :
+  { init : flags -&gt; (model, Cmd msg)
+  , update : msg -&gt; model -&gt; (model, Cmd msg)
+  , subscriptions : model -&gt; Sub msg
+  , view : model -&gt; Html msg }
+    -&gt; Program flags model msg</code></pre>
+</section></section>
+<section><section id="elm-compiler" class="titleslide slide level1"><h1>Elm Compiler</h1></section><section id="helpful-messages" class="slide level2">
+<h2>Helpful messages</h2>
+<ul>
+<li class="fragment"><a href="https://ellie-app.com/3r2QC9dHTnqa1/0">Spelling</a></li>
+<li class="fragment"><a href="https://ellie-app.com/3r2QC9dHTnqa1/1">Match branch types</a></li>
+<li class="fragment"><a href="https://ellie-app.com/3r2QC9dHTnqa1/2">Missing branch</a></li>
+</ul>
+</section><section id="compiler-driven-development" class="slide level2">
+<h2>Compiler Driven Development</h2>
+<ul>
+<li class="fragment"><a href="https://ellie-app.com/3r2QC9dHTnqa1/3">Increment &amp; decrement</a></li>
+</ul>
+</section></section>
+<section><section id="packages-and-versions" class="titleslide slide level1"><h1>Packages and Versions</h1></section><section id="packages" class="slide level2">
+<h2>Packages</h2>
+<ul>
+<li class="fragment"><a href="http://package.elm-lang.org/">Published packages</a></li>
+<li class="fragment"><a href="http://klaftertief.github.io/elm-search/">Function search</a></li>
+</ul>
+</section><section id="elm-package.json" class="slide level2">
+<h2>elm-package.json</h2>
+<pre><code>…
+    &quot;version&quot;: &quot;1.0.0&quot;,
+…
+    &quot;dependencies&quot;: {
+        &quot;elm-lang/core&quot;: &quot;5.0.0 &lt;= v &lt; 6.0.0&quot;,
+        &quot;elm-lang/html&quot;: &quot;2.0.0 &lt;= v &lt; 3.0.0&quot;,
+        &quot;elm-lang/svg&quot;: &quot;2.0.0 &lt;= v &lt; 3.0.0&quot;
+    },
+    &quot;elm-version&quot;: &quot;0.18.0 &lt;= v &lt; 0.19.0&quot;
+…</code></pre>
+</section><section id="semantic-versioning" class="slide level2">
+<h2>Semantic Versioning</h2>
+<p>Enforced for published packages</p>
+</section><section id="patch" class="slide level2">
+<h2>Patch</h2>
+<pre><code>&gt; elm-package diff elm-lang/core 5.1.0 5.1.1
+Comparing elm-lang/core 5.1.0 to 5.1.1...
+This is a PATCH change.</code></pre>
+</section><section id="minor" class="slide level2">
+<h2>Minor</h2>
+<pre><code>&gt; elm-package diff elm-lang/core 5.0.0 5.1.1
+Comparing elm-lang/core 5.0.0 to 5.1.1...
+This is a MINOR change.
+
+------ Changes to module List - MINOR ------
+
+    Added:
+        singleton : a -&gt; List a</code></pre>
+</section><section id="major" class="slide level2">
+<h2>Major</h2>
+<pre><code>&gt; elm-package diff elm-lang/navigation 1.0.0 2.1.0
+Comparing elm-lang/navigation 1.0.0 to 2.1.0...
+This is a MAJOR change.
+------ Changes to module Navigation - MAJOR ------
+   Added:
+       load : String -&gt; Platform.Cmd.Cmd msg
+   Removed:
+       type Parser a
+       makeParser : (Navigation.Location -&gt; a) -&gt; Navigation.Parser a
+   Changed:
+     - program : Navigation.Parser data -&gt; { init : data -&gt; (model, Platform.Cmd.Cmd msg),
+                                             update : msg -&gt; model -&gt; (model, Platform.Cmd.Cmd msg),
+                                             urlUpdate : data -&gt; model -&gt; (model, Platform.Cmd.Cmd msg),
+                                             view : model -&gt; Html.Html msg,
+                                             subscriptions : model -&gt; Platform.Sub.Sub msg
+                                           } -&gt; Platform.Program Basics.Never</code></pre>
+</section></section>
+<section><section id="time-traveling-debugger" class="titleslide slide level1"><h1>Time Traveling Debugger</h1></section><section id="section-6" class="slide level2">
+<h2></h2>
+<p><a href="http://localhost:8000/">Counter</a></p>
+<p><a href="http://localhost:3000/">Game</a></p>
+</section><section id="section-7" class="slide level2">
+<h2></h2>
+<figure>
+<img src="ElmStreet.png" />
+</figure>
+</section></section>
+<section><section id="questions" class="titleslide slide level1"><h1>Questions?</h1></section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
