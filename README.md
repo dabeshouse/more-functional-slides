@@ -1,14 +1,18 @@
 more-functional-slides
 
-Uses pandoc and reveal.js
+Uses [pandoc](http://pandoc.org/) and [reveal.js](https://github.com/hakimel/reveal.js/)
 
 Installed pandoc with homebrew
 
 > brew install pandoc
 
-Full installation of reveal.js in this directory as well.
+Used full installation of reveal.js in this directory as well.
 
 
-To produce the slides:
+Produced the slides with:
 
-> pandoc -s --mathjax -i -t revealjs -V theme:black -c override.css slides.md -o slides.html --slide-level 2
+> pandoc -s -i -t revealjs -V theme:black -c override.css slides.md -o slides.html --slide-level 2
+
+-s standalone
+
+-i incremental
